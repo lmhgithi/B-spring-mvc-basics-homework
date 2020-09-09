@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResult> exceptionHandler(MethodArgumentNotValidException e){
+    public ResponseEntity<ErrorResult> exceptionHandler(MethodArgumentNotValidException e) {
         String message = e.getBindingResult().getFieldError().getDefaultMessage();
         ErrorResult errorResult = new ErrorResult(message);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+    }
+
+    @ExceptionHandler(UserNameAlreadyExistsException.class)
+    public ResponseEntity<ErrorResult> userNameExistsHandler(UserNameAlreadyExistsException e) {
+        ErrorResult errorResult = new ErrorResult("用户名已存在");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResult);
     }
 }

@@ -2,6 +2,7 @@ package com.thoughtworks.capacity.gtb.mvc.service;
 
 import com.thoughtworks.capacity.gtb.mvc.Repository.UserRepository;
 import com.thoughtworks.capacity.gtb.mvc.domain.User;
+import com.thoughtworks.capacity.gtb.mvc.exception.UserNameAlreadyExistsException;
 import org.springframework.stereotype.Service;
 
 
@@ -14,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void userLogin(User user) {
+    public void userLogin(User user) throws UserNameAlreadyExistsException {
         userRepository.add(user);
     }
 }
