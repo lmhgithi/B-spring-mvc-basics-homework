@@ -18,17 +18,13 @@ public class UserRepository {
     };
     static Integer userId = 3;
 
-    public void add(User user) throws UserNameAlreadyExistsException {
-        if (findByUserNameIfExists(user.getUserName())){
-            throw new UserNameAlreadyExistsException();
-        }
-
-            user.setId(userId);
+    public void add(User user) {
+        user.setId(userId);
         userId += 1;
         users.add(user);
     }
 
-    private boolean findByUserNameIfExists(String userName) {
+    public boolean findByUserNameIfExists(String userName) {
         return users.stream().anyMatch(user -> user.getUserName().equals(userName));
     }
 

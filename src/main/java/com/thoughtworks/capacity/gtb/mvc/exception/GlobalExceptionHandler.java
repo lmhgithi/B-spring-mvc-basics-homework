@@ -1,5 +1,6 @@
 package com.thoughtworks.capacity.gtb.mvc.exception;
 
+import com.thoughtworks.capacity.gtb.mvc.exception.domain.ErrorResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

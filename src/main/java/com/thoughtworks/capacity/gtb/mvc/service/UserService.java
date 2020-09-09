@@ -19,6 +19,9 @@ public class UserService {
     }
 
     public void userRegister(User user) throws UserNameAlreadyExistsException {
+        if (userRepository.findByUserNameIfExists(user.getUserName())){
+            throw new UserNameAlreadyExistsException();
+        }
         userRepository.add(user);
     }
 
