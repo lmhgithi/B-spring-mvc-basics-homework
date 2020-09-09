@@ -30,7 +30,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity userRegister(@RequestBody @Valid User user) throws UserNameAlreadyExistsException {
         this.userService.userRegister(user);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 

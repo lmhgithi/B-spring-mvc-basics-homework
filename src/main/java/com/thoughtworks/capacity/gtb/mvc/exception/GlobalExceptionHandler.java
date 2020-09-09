@@ -24,6 +24,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNameOrPassWordInvalidException.class)
     public ResponseEntity<ErrorResult> invalidHandler(UserNameOrPassWordInvalidException e) {
         ErrorResult errorResult = new ErrorResult("用户名或密码错误");
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResult);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
     }
 }
