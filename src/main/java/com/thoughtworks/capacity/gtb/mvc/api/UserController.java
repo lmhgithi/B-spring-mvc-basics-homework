@@ -3,6 +3,7 @@ package com.thoughtworks.capacity.gtb.mvc.api;
 
 import com.thoughtworks.capacity.gtb.mvc.domain.User;
 import com.thoughtworks.capacity.gtb.mvc.exception.UserNameAlreadyExistsException;
+import com.thoughtworks.capacity.gtb.mvc.exception.UserNameOrPassWordInvalidException;
 import com.thoughtworks.capacity.gtb.mvc.service.UserService;
 
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,8 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<User> userLogin(@RequestBody @Valid User user) {
+    public ResponseEntity<User> userLogin(@RequestBody @Valid User user)
+            throws UserNameOrPassWordInvalidException {
         return ResponseEntity.status(HttpStatus.OK).body(this.userService.userLogin(user));
     }
 }
