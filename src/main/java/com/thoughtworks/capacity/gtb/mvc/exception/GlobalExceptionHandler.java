@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UserNameAlreadyExistsException.class)
-    public ResponseEntity<ErrorResult> userNameExistsHandler(UserNameAlreadyExistsException e) {
+    public ResponseEntity<ErrorResult> notExistsHandler(UserNameAlreadyExistsException e) {
         ErrorResult errorResult = new ErrorResult("用户名已存在");
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResult);
     }

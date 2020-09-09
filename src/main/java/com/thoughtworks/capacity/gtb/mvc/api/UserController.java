@@ -26,9 +26,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity userLogin(@RequestBody @Valid User user) throws UserNameAlreadyExistsException {
-        this.userService.userLogin(user);
+    @PostMapping("/register")
+    public ResponseEntity userRegister(@RequestBody @Valid User user) throws UserNameAlreadyExistsException {
+        this.userService.userRegister(user);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<User> userLogin(@RequestBody @Valid User user) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.userService.userLogin(user));
     }
 }
