@@ -18,14 +18,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void userRegister(User user) throws UserNameAlreadyExistsException {
-        if (userRepository.findByUserNameIfExists(user.getUserName())){
+    public void register(User user) throws UserNameAlreadyExistsException {
+        if (userRepository.findByUserName(user.getUserName()).isPresent()){
             throw new UserNameAlreadyExistsException();
         }
         userRepository.add(user);
     }
 
-    public User userLogin(User user) throws UserNameOrPassWordInvalidException {
+    public User login(User user) throws UserNameOrPassWordInvalidException {
         Optional<User> userToLogin = userRepository.findByUserName(user.getUserName());
         if (userToLogin.isPresent()) {
             if (userToLogin.get().getPassWord().equals(user.getPassWord())) {

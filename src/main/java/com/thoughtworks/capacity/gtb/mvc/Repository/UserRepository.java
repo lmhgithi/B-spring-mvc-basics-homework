@@ -24,10 +24,6 @@ public class UserRepository {
         users.add(user);
     }
 
-    public boolean findByUserNameIfExists(String userName) {
-        return users.stream().anyMatch(user -> user.getUserName().equals(userName));
-    }
-
     public Optional<User> findByUserName(String userName) {
         return users.stream().
                 filter(user -> user.getUserName().equals(userName)).

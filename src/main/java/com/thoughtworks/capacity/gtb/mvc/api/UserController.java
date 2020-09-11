@@ -29,7 +29,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity userRegister(@RequestBody @Valid User user) throws UserNameAlreadyExistsException {
-        this.userService.userRegister(user);
+        this.userService.register(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -37,6 +37,6 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<User> userLogin(@RequestBody @Valid User user)
             throws UserNameOrPassWordInvalidException {
-        return ResponseEntity.status(HttpStatus.OK).body(this.userService.userLogin(user));
+        return ResponseEntity.status(HttpStatus.OK).body(this.userService.login(user));
     }
 }
