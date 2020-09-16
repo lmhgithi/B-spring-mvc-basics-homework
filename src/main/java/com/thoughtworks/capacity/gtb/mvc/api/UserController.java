@@ -9,10 +9,7 @@ import com.thoughtworks.capacity.gtb.mvc.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,22 +18,22 @@ import javax.validation.Valid;
 @Validated
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService){
         this.userService = userService;
     }
 
     @PostMapping("/register")
-    public ResponseEntity userRegister(@RequestBody @Valid User user) throws UserNameAlreadyExistsException {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void userRegister(@RequestBody @Valid User user) throws UserNameAlreadyExistsException {
         this.userService.register(user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<User> userLogin(@RequestBody @Valid User user)
+    public User userLogin(@RequestBody @Valid User user)
             throws UserNameOrPassWordInvalidException {
-        return ResponseEntity.status(HttpStatus.OK).body(this.userService.login(user));
+        return this.userService.login(user);
     }
 }
